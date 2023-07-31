@@ -1,7 +1,8 @@
-- name: some playbook
+- name: installing nginx
   hosts: all
+  become: true
   tasks:
-    - name: demo task
-      ansible.builtin.yum:
+   - name: install nginixx
+     ansible.builtin.yum:
         name: nginx
-        state: installed
+        state: latest
