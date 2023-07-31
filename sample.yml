@@ -7,8 +7,8 @@
         name: nginx
         state: latest
 
-- name: Start service nginx
-  ansible.builtin.systemd:
-    name: nginx
-    state: started
-    enabled: yes
+- name: Start nginx
+  ansible.builtin.service:
+     name: nginx
+     state: started
+     enabled: yes
