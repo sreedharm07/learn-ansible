@@ -15,8 +15,13 @@
 
     - name: Remove file
       ansible.builtin.file:
-        path: /usr/share/nginx/html*
+        path: /usr/share/nginx/html
         state: absent
+
+    - name: create app directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
 
     - name: Unzip and download
       ansible.builtin.unarchive:
@@ -27,7 +32,7 @@
     - name: Copying service file
       ansible.builtin.copy:
         src: nginx.conf
-        dest: /etc/nginx/default.d
+        dest: /etc/nginx/default.d/nginx.conf
 
     - name: Reload nginx
       ansible.builtin.service:
