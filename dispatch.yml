@@ -1,0 +1,40 @@
+- name: installing dispatch service
+  hosts: all
+  become: true
+  tasks:
+    - name: installing golang
+      ansible.builtin.yum:
+        name: golang
+        state: latest
+
+    - name: Add app user
+      ansible.builtin.user:
+        name: roboshop
+
+    - name: create app directory
+      ansible.builtin.file:
+        path: /app
+        state: directory
+
+    - name: Unzip and download
+      ansible.builtin.unarchive:
+        src: https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
+        dest: /app
+        remote_src: yes
+
+    - name: dependencies
+      ansible.builtin.shell: go mod init dispatch ; go get ; go built
+      args:
+        chdir: /app
+
+    - name: Copying service file
+      ansible.builtin.copy:
+        src: dispatch.service
+        dest: /etc/systemd/system/dispatch.service
+
+    - name: Restart service dispatch
+      ansible.builtin.service:
+        name: dispatch
+        state: restarted
+        enabled: yes
+        daemon_reload: true
