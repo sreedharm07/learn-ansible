@@ -29,6 +29,11 @@
       args:
         chdir: /app
 
+    - name: Copying shipping service file
+      ansible.builtin.copy:
+        src: shipping.service
+        dest: /etc/systemd/system/shipping.service
+
     - name: Restart service shipping,
       ansible.builtin.service:
         name: shipping
