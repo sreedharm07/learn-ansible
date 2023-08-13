@@ -22,15 +22,17 @@
         dest: /app
         remote_src: yes
 
+    - name: Copying service file
+      ansible.builtin.copy:
+        src: dispatch.service
+        dest: /etc/systemd/system/dispatch.service
+
     - name: dependencies
       ansible.builtin.shell: go mod init dispatch; go get; go built
       args:
        chdir: /app
 
-    - name: Copying service file
-      ansible.builtin.copy:
-        src: dispatch.service
-        dest: /etc/systemd/system/dispatch.service
+
 
     - name: Restart service dispatch
       ansible.builtin.service:
