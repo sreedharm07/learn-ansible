@@ -8,7 +8,7 @@
     - name: downloading rabbitmq repos
       ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
 
-    - name: installing payment
+    - name: installing rabbitmq
       ansible.builtin.yum:
         name: rabbitmq-server
         state: latest
