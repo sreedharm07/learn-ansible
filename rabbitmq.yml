@@ -20,8 +20,8 @@
         enabled: yes
         daemon_reload: true
 
-    - name: downloading erlang repos
-      ansible.builtin.shell: rabbitmqctl add_user roboshop roboshop123
-
-    - name: downloading erlang repos
-      ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+#    - name: add user
+#      ansible.builtin.shell: rabbitmqctl add_user roboshop roboshop123
+#
+#    - name: permissions for user
+#      ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
