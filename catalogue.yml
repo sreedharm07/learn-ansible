@@ -5,7 +5,7 @@
     - name: downloading nodejs repo
       ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-    - name: installing nginx
+    - name: installing nodejs
       ansible.builtin.yum:
         name: nodejs
         state: latest
@@ -26,7 +26,7 @@
         remote_src: yes
 
     - name: dependencies
-      ansible.builtin.shell: npm install
+      ansible.builtin.shell: cd/app ; npm install
 
     - name: Copying service file
       ansible.builtin.copy:
