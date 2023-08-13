@@ -29,7 +29,7 @@
         chdir: /app
 
     - name: Copying service file
-      ansible.builtin.copy:
+      ansible.builtin.move:
         src: target/shipping-1.0.jar
         dest: shipping.jar
 
