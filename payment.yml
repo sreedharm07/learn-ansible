@@ -9,7 +9,7 @@
           -python36 
           -gcc  
           -python3-devel
-        state: latest
+      state: latest
 
     - name: Add app payment
       ansible.builtin.user:
