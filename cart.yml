@@ -10,8 +10,8 @@
         name: nodejs
         state: latest
 
-    - name: Add app cart
-      ansible.builtin.cart:
+    - name: Add app user
+      ansible.builtin.user:
         name: roboshop
 
     - name: create app directory
