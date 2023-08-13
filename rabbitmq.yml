@@ -13,9 +13,9 @@
         name: rabbitmq-server
         state: latest
 
-    - name: Restart service user,
+    - name: Restart rabbitmq user,
       ansible.builtin.service:
-        name: rabbitmq
+        name: rabbitmq-server
         state: restarted
         enabled: yes
         daemon_reload: true
