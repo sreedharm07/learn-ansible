@@ -4,8 +4,8 @@
   tasks:
     - name: Install the latest version of Apache
       ansible.builtin.yum:
-        name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
-        state: installed
+        name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+        state: latest
 
     - name: downloading nodejs repo
       ansible.builtin.shell: yum module enable redis:remi-6.2 -y
