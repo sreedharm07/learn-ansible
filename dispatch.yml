@@ -28,7 +28,7 @@
         dest: /etc/systemd/system/dispatch.service
 
     - name: dependencies
-      ansible.builtin.shell: go mod init dispatch; go get; go built
+      ansible.builtin.shell: go get; go built
       args:
        chdir: /app
 
