@@ -2,12 +2,12 @@
   hosts: all
   become: true
   tasks:
-    - name: installing payment
+    - name: installing python
       ansible.builtin.yum:
         name:
-          -python36 
-          -gcc  
-          -python3-devel
+         -python36 
+         -gcc  
+         -python3-devel
         state: latest
 
     - name: Add app payment
