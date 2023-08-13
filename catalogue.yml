@@ -33,7 +33,7 @@
         src: catalogue.service
         dest: /etc/systemd/system/catalogue.service
 
-    - name: Restart service nginx, in all cases
+    - name: Restart service catalogue, in all cases
       ansible.builtin.service:
         name: catalogue
         state: restarted
