@@ -6,8 +6,8 @@
     - name: installing payment
       ansible.builtin.yum:
         name:
-          -python36 
-          -gcc  
+          -python36 ,
+          -gcc  ,
           -python3-devel
         state: latest
 
