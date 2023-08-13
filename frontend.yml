@@ -27,7 +27,7 @@
     - name: Copying service file
       ansible.builtin.copy:
         src: nginx.conf
-        dest: /etc/nginx/default.d/
+        dest: /etc/nginx/default.d
 
     - name: Reload nginx
       ansible.builtin.service:
