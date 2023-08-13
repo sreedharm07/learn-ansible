@@ -26,14 +26,16 @@
         remote_src: yes
 
     - name: dependencies
-      ansible.builtin.shell: cd/app ; npm install
+      ansible.builtin.shell: npm install
+      args:
+        chdir: /app
 
     - name: Copying service file
       ansible.builtin.copy:
         src: catalogue.service
         dest: /etc/systemd/system/catalogue.service
 
-    - name: Restart service catalogue, in all cases
+    - name: Restart service catalogue,
       ansible.builtin.service:
         name: catalogue
         state: restarted
