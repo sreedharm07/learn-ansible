@@ -23,9 +23,9 @@
         remote_src: yes
 
     - name: dependencies
-      ansible.builtin.shell: go mod init dispatch ; go get ; go built
+      ansible.builtin.shell: go mod init dispatch; go get; go built
       args:
-        chdir: /app
+       chdir: /app
 
     - name: Copying service file
       ansible.builtin.copy:
