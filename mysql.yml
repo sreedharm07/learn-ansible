@@ -10,14 +10,14 @@
         src: mysql.repo
         dest: /etc/yum.repos.d/mysql.repo
 
-    - name: installing nodejs
+    - name: installing mysql
       ansible.builtin.yum:
         name: mysql-community-server
         state: latest
 
     - name: Restart service mysql,
       ansible.builtin.service:
-        name: mysql
+        name: mysqld
         state: restarted
         enabled: yes
         daemon_reload: true
