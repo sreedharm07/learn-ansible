@@ -1,0 +1,27 @@
+- name: installing rabbitmq service
+  hosts: all
+  become: true
+  tasks:
+    - name: downloading erlang repos
+      ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/erlang/script.rpm.sh | bash
+
+    - name: downloading rabbitmq repos
+      ansible.builtin.shell: curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | bash
+
+    - name: installing payment
+      ansible.builtin.yum:
+        name: rabbitmq-server
+        state: latest
+
+    - name: Restart service user,
+      ansible.builtin.service:
+        name: rabbitmq
+        state: restarted
+        enabled: yes
+        daemon_reload: true
+
+    - name: downloading erlang repos
+      ansible.builtin.shell: rabbitmqctl add_user roboshop roboshop123
+
+    - name: downloading erlang repos
+      ansible.builtin.shell: rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
