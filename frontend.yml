@@ -32,9 +32,14 @@
     - name: Copying service file
       ansible.builtin.copy:
         src: nginx.conf
-        dest: /etc/nginx/default.d/nginx.conf
+        dest: /etc/nginx/default.d/roboshop.conf
 
-    - name: Reload nginx
+    - name: Enable service nginx
       ansible.builtin.service:
         name: nginx
-        state: reloaded
+        enabled: yes
+
+    - name: Restart service nginx, in all cases
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
