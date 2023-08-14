@@ -1,8 +1,4 @@
-- name : nodejs
-  become: true
-  hosts: all
-  tasks:
-  - name: importing task
-    ansible.builtin.import_role:
+- name: importing task
+  ansible.builtin.import_role:
        name: common
        tasks_from: nodejs.yml
