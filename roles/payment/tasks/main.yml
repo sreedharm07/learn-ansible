@@ -1,39 +1,39 @@
-    - name: installing python
-      ansible.builtin.yum:
-        name:
-          - python36
-          - gcc
-          - python3-devel
-        state: latest
+- name: installing python
+  ansible.builtin.yum:
+    name:
+      - python36
+      - gcc
+      - python3-devel
+    state: latest
 
-    - name: Add app payment
-      ansible.builtin.user:
-        name: roboshop
+- name: Add app payment
+  ansible.builtin.user:
+    name: roboshop
 
-    - name: create app directory
-      ansible.builtin.file:
-        path: /app
-        state: directory
+- name: create app directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
 
-    - name: Unzip and download
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/payment.zip
-        dest: /app
-        remote_src: yes
+- name: Unzip and download
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/payment.zip
+    dest: /app
+    remote_src: yes
 
-    - name: download dependencies
-      ansible.builtin.shell: pip3.6 install -r requirements.txt
-      args:
-        chdir: /app
+- name: download dependencies
+  ansible.builtin.shell: pip3.6 install -r requirements.txt
+  args:
+    chdir: /app
 
-    - name: Copying payment service file
-      ansible.builtin.copy:
-        src: payment.service
-        dest: /etc/systemd/system/payment.service
+- name: Copying payment service file
+  ansible.builtin.copy:
+    src: payment.service
+    dest: /etc/systemd/system/payment.service
 
-    - name: Restart service user,
-      ansible.builtin.service:
-        name: payment
-        state: restarted
-        enabled: yes
-        daemon_reload: true
+- name: Restart service user,
+  ansible.builtin.service:
+    name: payment
+    state: restarted
+    enabled: yes
+    daemon_reload: true
