@@ -6,20 +6,9 @@
     name: nodejs
     state: latest
 
-- name: Add app user
-  ansible.builtin.user:
-    name: roboshop
-
-- name: create app directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
-
-- name: Unzip and download
-  ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
-    dest: /app
-    remote_src: yes
+- name: importing tasks
+  ansible.builtin.import_tasks:
+      file: req
 
 - name: dependencies
   ansible.builtin.shell: npm install
