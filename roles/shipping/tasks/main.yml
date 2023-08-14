@@ -1,50 +1,50 @@
-    - name: installing shipping
-      ansible.builtin.yum:
-        name: maven
-        state: latest
+- name: installing shipping
+  ansible.builtin.yum:
+    name: maven
+    state: latest
 
-    - name: Add app payment
-      ansible.builtin.user:
-        name: roboshop
+- name: Add app payment
+  ansible.builtin.user:
+    name: roboshop
 
-    - name: create app directory
-      ansible.builtin.file:
-        path: /app
-        state: directory
+- name: create app directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
 
-    - name: Unzip and download
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
-        dest: /app
-        remote_src: yes
+- name: Unzip and download
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/shipping.zip
+    dest: /app
+    remote_src: yes
 
 
-    - name: download maven  dependencies
-      ansible.builtin.shell: mvn clean package ; mv target/shipping-1.0.jar shipping.jar
-      args:
-        chdir: /app
+- name: download maven  dependencies
+  ansible.builtin.shell: mvn clean package ; mv target/shipping-1.0.jar shipping.jar
+  args:
+    chdir: /app
 
-    - name: Copying shipping service file
-      ansible.builtin.copy:
-        src: shipping.service
-        dest: /etc/systemd/system/shipping.service
+- name: Copying shipping service file
+  ansible.builtin.copy:
+    src: shipping.service
+    dest: /etc/systemd/system/shipping.service
 
-    - name: Restart service shipping,
-      ansible.builtin.service:
-        name: shipping
-        state: restarted
-        enabled: yes
-        daemon_reload: true
+- name: Restart service shipping,
+  ansible.builtin.service:
+    name: shipping
+    state: restarted
+    enabled: yes
+    daemon_reload: true
 
-    - name: installing mysql
-      ansible.builtin.yum:
-        name: mysql
-        state: latest
+- name: installing mysql
+  ansible.builtin.yum:
+    name: mysql
+    state: latest
 
-    - name: loading schema
-      ansible.builtin.shell: mysql -h mysql-dev.cloudev7.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
+- name: loading schema
+  ansible.builtin.shell: mysql -h mysql-dev.cloudev7.online -uroot -pRoboShop@1 < /app/schema/shipping.sql
 
-    - name: Restart service shipping,
-      ansible.builtin.service:
-        name: shipping
-        state: restarted
+- name: Restart service shipping,
+  ansible.builtin.service:
+    name: shipping
+    state: restarted
