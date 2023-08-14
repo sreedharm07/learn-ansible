@@ -1,38 +1,38 @@
-  - name: downloading nodejs repo
-    ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+- name: downloading nodejs repo
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
-  - name: installing nodejs
-    ansible.builtin.yum:
-        name: nodejs
-        state: latest
+- name: installing nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: latest
 
-  - name: Add app user
-    ansible.builtin.user:
-        name: roboshop
+- name: Add app user
+  ansible.builtin.user:
+    name: roboshop
 
-  - name: create app directory
-    ansible.builtin.file:
-        path: /app
-        state: directory
-  - name: Unzip and download
-    ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/cart.zip
-        dest: /app
-        remote_src: yes
+- name: create app directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+- name: Unzip and download
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/cart.zip
+    dest: /app
+    remote_src: yes
 
-  - name: dependencies
-    ansible.builtin.shell: npm install
-    args:
-     chdir: /app
+- name: dependencies
+  ansible.builtin.shell: npm install
+  args:
+    chdir: /app
 
-  - name: Copying service file
-    ansible.builtin.copy:
-        src: cart.service
-        dest: /etc/systemd/system/cart.service
+- name: Copying service file
+  ansible.builtin.copy:
+    src: cart.service
+    dest: /etc/systemd/system/cart.service
 
-  - name: Restart service cart,
-    ansible.builtin.service:
-        name: cart
-        state: restarted
-        enabled: yes
-        daemon_reload: true
+- name: Restart service cart,
+  ansible.builtin.service:
+    name: cart
+    state: restarted
+    enabled: yes
+    daemon_reload: true

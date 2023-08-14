@@ -1,41 +1,41 @@
-    - name: installing nginx
-      ansible.builtin.yum:
-        name: nginx
-        state: latest
+- name: installing nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: latest
 
-    - name: Start service nginx
-      ansible.builtin.service:
-        name: nginx
-        state: started
-        enabled: yes
+- name: Start service nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
 
-    - name: Remove file
-      ansible.builtin.file:
-        path: /usr/share/nginx/html
-        state: absent
+- name: Remove file
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
 
-    - name: create app directory
-      ansible.builtin.file:
-        path: /usr/share/nginx/html
-        state: directory
+- name: create app directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
 
-    - name: Unzip and download
-      ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
-        dest: /usr/share/nginx/html
-        remote_src: yes
+- name: Unzip and download
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
 
-    - name: Copying service file
-      ansible.builtin.copy:
-        src: nginx.conf
-        dest: /etc/nginx/default.d/roboshop.conf
+- name: Copying service file
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: /etc/nginx/default.d/roboshop.conf
 
-    - name: Enable service nginx
-      ansible.builtin.service:
-        name: nginx
-        enabled: yes
+- name: Enable service nginx
+  ansible.builtin.service:
+    name: nginx
+    enabled: yes
 
-    - name: Restart service nginx, in all cases
-      ansible.builtin.service:
-        name: nginx
-        state: restarted
+- name: Restart service nginx, in all cases
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
