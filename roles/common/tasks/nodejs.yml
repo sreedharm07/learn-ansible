@@ -17,7 +17,7 @@
 
 - name: Unzip and download
   ansible.builtin.unarchive:
-    src: https://roboshop-artifacts.s3.amazonaws.com/"{{component}}".zip
+    src: https://roboshop-artifacts.s3.amazonaws.com/{{component}}.zip
     dest: /app
     remote_src: yes
 
@@ -28,12 +28,12 @@
 
 - name: Copying service file
   ansible.builtin.copy:
-    src: "{{component}}".service
-    dest: /etc/systemd/system/"{{component}}".service
+    src: {{component}}.service
+    dest: /etc/systemd/system/{{component}}.service
 
-- name: Restart service "{{component}}",
+- name: Restart service {{component}},
   ansible.builtin.service:
-    name: "{{component}}"
+    name: {{component}}
     state: restarted
     enabled: yes
     daemon_reload: true
@@ -50,5 +50,5 @@
   when: schema is defined
 
 - name: schema loading
-  ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online </app/schema/"{{component}}".js
+  ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online </app/schema/{{component}}.js
   when: schema is defined
