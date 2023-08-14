@@ -42,6 +42,7 @@
   ansible.builtin.copy:
     src: mongo.repo
     dest: /etc/yum.repos.d/mongo.repo
+  when: schema is defined
 
 - name: installing mongod
   ansible.builtin.yum:
