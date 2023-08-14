@@ -1,7 +1,3 @@
-- name: installing cart service
-  hosts: all
-  become: true
-  tasks:
     - name: downloading nodejs repo
       ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
@@ -21,7 +17,7 @@
 
     - name: Unzip and download
       ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/cart.zip
+        src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
         dest: /app
         remote_src: yes
 
@@ -32,12 +28,25 @@
 
     - name: Copying service file
       ansible.builtin.copy:
-        src: cart.service
-        dest: /etc/systemd/system/cart.service
+        src: catalogue.service
+        dest: /etc/systemd/system/catalogue.service
 
-    - name: Restart service cart,
+    - name: Restart service catalogue,
       ansible.builtin.service:
-        name: cart
+        name: catalogue
         state: restarted
         enabled: yes
         daemon_reload: true
+
+    - name: Copying service file
+      ansible.builtin.copy:
+        src: mongo.repo
+        dest: /etc/yum.repos.d/mongo.repo
+
+    - name: installing mongod
+      ansible.builtin.yum:
+        name: mongodb-org-shell
+        state: latest
+
+    - name: schema loading
+      ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online </app/schema/catalogue.js

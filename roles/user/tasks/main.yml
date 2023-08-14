@@ -1,7 +1,3 @@
-- name: installong catalogue service
-  hosts: all
-  become: true
-  tasks:
     - name: downloading nodejs repo
       ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
@@ -21,7 +17,7 @@
 
     - name: Unzip and download
       ansible.builtin.unarchive:
-        src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+        src: https://roboshop-artifacts.s3.amazonaws.com/user.zip
         dest: /app
         remote_src: yes
 
@@ -32,12 +28,12 @@
 
     - name: Copying service file
       ansible.builtin.copy:
-        src: catalogue.service
-        dest: /etc/systemd/system/catalogue.service
+        src: user.service
+        dest: /etc/systemd/system/user.service
 
-    - name: Restart service catalogue,
+    - name: Restart service user,
       ansible.builtin.service:
-        name: catalogue
+        name: user
         state: restarted
         enabled: yes
         daemon_reload: true
@@ -53,4 +49,4 @@
         state: latest
 
     - name: schema loading
-      ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online </app/schema/catalogue.js
+      ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online </app/schema/user.js

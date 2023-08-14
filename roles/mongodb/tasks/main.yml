@@ -1,7 +1,3 @@
-- name : installing mongodb
-  hosts : all
-  become: true
-  tasks:
     - name: Copying service file
       ansible.builtin.copy:
         src: mongo.repo

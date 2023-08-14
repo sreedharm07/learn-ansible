@@ -1,7 +1,3 @@
-- name: installing mysql service
-  hosts: all
-  become: true
-  tasks:
     - name: disabling mysql
       ansible.builtin.shell: yum module disable mysql -y
 

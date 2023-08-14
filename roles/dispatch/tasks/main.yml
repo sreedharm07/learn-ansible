@@ -1,7 +1,3 @@
-- name: installing dispatch service
-  hosts: all
-  become: true
-  tasks:
     - name: installing golang
       ansible.builtin.yum:
         name: golang
@@ -30,9 +26,7 @@
     - name: dependencies
       ansible.builtin.shell: go mod init dispatch; go get; go build
       args:
-       chdir: /app
-
-
+        chdir: /app
 
     - name: Restart service dispatch
       ansible.builtin.service:

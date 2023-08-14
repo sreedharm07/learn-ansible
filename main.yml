@@ -1,0 +1,5 @@
+- name: set up main file
+  hosts: all
+  become: true
+  roles:
+    - "{{ component }}"

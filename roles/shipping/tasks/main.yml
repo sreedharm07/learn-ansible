@@ -1,8 +1,3 @@
-- name: installing shipping service
-  hosts: all
-  become: true
-  tasks:
-
     - name: installing shipping
       ansible.builtin.yum:
         name: maven
