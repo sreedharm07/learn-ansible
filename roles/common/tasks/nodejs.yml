@@ -8,7 +8,7 @@
 
 - name: importing tasks
   ansible.builtin.import_tasks:
-      file: req
+      file: req.yml
 
 - name: dependencies
   ansible.builtin.shell: npm install
