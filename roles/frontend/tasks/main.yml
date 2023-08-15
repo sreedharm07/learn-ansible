@@ -3,12 +3,6 @@
     name: nginx
     state: latest
 
-- name: Start service nginx
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: yes
-
 - name: Remove file
   ansible.builtin.file:
     path: /usr/share/nginx/html
@@ -30,9 +24,10 @@
     src: nginx.conf
     dest: /etc/nginx/default.d/roboshop.conf
 
-- name: Enable service nginx
+- name: Start service nginx
   ansible.builtin.service:
     name: nginx
+    state: started
     enabled: yes
 
 - name: Restart service nginx, in all cases
