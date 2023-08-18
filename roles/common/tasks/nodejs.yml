@@ -40,5 +40,5 @@
   when: schema is defined
 
 - name: schema loading
-  ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online </app/schema/{{component}}.js
+  ansible.builtin.shell: mongo --host mongodb-dev.cloudev7.online < /app/schema/{{component}}.js
   when: schema is defined
